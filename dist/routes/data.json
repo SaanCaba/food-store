@@ -1,0 +1,16 @@
+{
+    "Foods": [
+        {
+            "id": 1,
+            "name": "Hamburguesa"
+        },
+        {
+            "id": 2,
+            "name": "Hamburguesa"
+        },
+        {
+            "id": 3,
+            "name": "Hamburguesa"
+        }
+    ]
+}

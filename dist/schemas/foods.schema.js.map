@@ -1,0 +1,1 @@
+{"version":3,"file":"foods.schema.js","sourceRoot":"","sources":["../../src/schemas/foods.schema.ts"],"names":[],"mappings":";;;;;;AAAA,8CAAsB;AAEtB,0BAA0B;AAC1B,MAAM,IAAI,GAAG,aAAG,CAAC,MAAM,EAAE,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,EAAE,CAAC,CAAC,OAAO,CAAC,oBAAoB,CAAC,CAAA;AAGzD,QAAA,aAAa,GAAG,aAAG,CAAC,MAAM,CAAC;IACpC,IAAI,EAAE,IAAI,CAAC,QAAQ,EAAE;CACxB,CAAC,CAAA"}
