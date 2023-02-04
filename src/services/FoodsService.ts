@@ -1,5 +1,6 @@
 import foods from './data.json';
 import boom from '@hapi/boom';
+import FoodProduct from '../models/foodProduct';
 
 interface Foods{
     id: number | string,
@@ -36,6 +37,12 @@ class FoodService{
         }
         return foodType;
     }
+
+  async createFood(info:Foods){
+       const newFood = await new FoodProduct(info).save()
+            return newFood
+    }
+
 }
 
 

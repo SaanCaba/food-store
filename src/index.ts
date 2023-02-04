@@ -5,18 +5,19 @@ import morgan from 'morgan';
 const helmet = require('helmet');
 import { errorHandler, logErrors } from './middlewares/error.handler.js';
 import cors from 'cors'
+import connection from './db/connect.js';
 dotenv.config();
+
+connection();
 const app = express();
 
 app.use(express.json());
-app.use(helmet())
-app.use(morgan('tiny'));
-app.use('/', routes);
 
-const whiteList = [process.env.URL];
+const localHost= 'http://localhost:3001'
+const whiteList = [process.env.URL, localHost];
 const options = {
     origin: (origin, callback) => {
-        if(whiteList.includes(origin)){
+        if(whiteList.includes(origin) || whiteList.includes(localHost)){
             callback(null, true);
         }else{
             callback(new Error('no permitido!'));
@@ -24,7 +25,13 @@ const options = {
     }
 }
 
-app.use(cors(options));
+app.use(
+    cors(options)
+)
+
+app.use(helmet())
+app.use(morgan('tiny'));
+app.use('/', routes);
 
 
 app.use(logErrors);

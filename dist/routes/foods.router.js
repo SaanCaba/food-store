@@ -4,17 +4,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const validator_handler_1 = require("../middlewares/validator.handler");
-const foods_schema_1 = require("../schemas/foods.schema");
 const FoodsService_1 = __importDefault(require("../services/FoodsService"));
 const router = express_1.default.Router();
 const service = new FoodsService_1.default();
 router.get('/', (req, res) => {
     return res.status(200).json(service.getAllFoods());
 });
-router.get('/filter', (0, validator_handler_1.validateHandler)(foods_schema_1.getTypeSchema, 'query'), (req, res, next) => {
+router.get('/filter', 
+// validateHandler(getTypeSchema, 'query'),
+(req, res, next) => {
     try {
         const { type } = req.query;
+        console.log(type);
         let foodsType = service.getTypeOfFood(type);
         return res.status(200).json(foodsType);
     }
@@ -27,6 +28,18 @@ router.get('/:id', (req, res, next) => {
         const { id } = req.params;
         let food = service.findOneFood(id);
         return res.status(200).json(food);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+router.post('/', async (req, res, next) => {
+    try {
+        console.log(req.body);
+        let pepe = await service.createFood(req.body.info);
+        console.log(pepe);
+        res.json(pepe);
+        //type
     }
     catch (error) {
         next(error);
