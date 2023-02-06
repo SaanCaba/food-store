@@ -1,12 +1,13 @@
 import foods from './data.json';
 import boom from '@hapi/boom';
 import FoodProduct from '../models/foodProduct';
-
+const  {cloudinary} = require('../routes/utils/cloudinary')
 interface Foods{
     id: number | string,
     type: string,
     name: string,
-    image: string
+    image: string,
+    description: string
 }
 
 class FoodService{
@@ -39,7 +40,16 @@ class FoodService{
     }
 
   async createFood(info:Foods){
-       const newFood = await new FoodProduct(info).save()
+    const fileStr = info.image;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+        upload_preset: 'dev_setups'
+    })
+       const newFood = await new FoodProduct({
+        image:uploadedResponse.url,
+        name:info.name,
+        type: info.type,
+        description: info.description
+       }).save()
             return newFood
     }
 

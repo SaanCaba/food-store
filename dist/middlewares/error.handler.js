@@ -7,7 +7,7 @@ function logErrors(error, req, res, next) {
 }
 exports.logErrors = logErrors;
 function boomErrorHandler(error, req, res, next) {
-    if (error.isBoom) {
+    if (!error.isBoom) {
         //output es de Boom y tiene la info del error
         const { output } = error;
         res.status(output.statusCode).json(output.payload);

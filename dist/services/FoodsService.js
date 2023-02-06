@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const data_json_1 = __importDefault(require("./data.json"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const foodProduct_1 = __importDefault(require("../models/foodProduct"));
+const { cloudinary } = require('../routes/utils/cloudinary');
 class FoodService {
     constructor() {
         this.foods = data_json_1.default.foods;
@@ -32,7 +33,16 @@ class FoodService {
         return foodType;
     }
     async createFood(info) {
-        const newFood = await new foodProduct_1.default(info).save();
+        const fileStr = info.image;
+        const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'dev_setups'
+        });
+        const newFood = await new foodProduct_1.default({
+            image: uploadedResponse.url,
+            name: info.name,
+            type: info.type,
+            description: info.description
+        }).save();
         return newFood;
     }
 }

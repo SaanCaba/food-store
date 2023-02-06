@@ -1,17 +1,18 @@
 import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config();
 import routes from './routes/index.js'
 import morgan from 'morgan';
 const helmet = require('helmet');
 import { errorHandler, logErrors } from './middlewares/error.handler.js';
 import cors from 'cors'
 import connection from './db/connect.js';
-dotenv.config();
 
 connection();
 const app = express();
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}))
+app.use(express.urlencoded({limit:'50mb', extended: true}))
 
 const localHost= 'http://localhost:3001'
 const whiteList = [process.env.URL, localHost];

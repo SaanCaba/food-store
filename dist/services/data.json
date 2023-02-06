@@ -4,43 +4,50 @@
             "id": 1,
             "type": "Burger",
             "name": "Hamburguesa Primavera",
-            "image": "https://images.pexels.com/photos/2702674/pexels-photo-2702674.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "image": "https://images.pexels.com/photos/2702674/pexels-photo-2702674.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "description": "Hamburguesa sencilla"
         },
         {
             "id": 2,
             "type": "Burger",
             "name": "Hamburguesa Texana",
-            "image": "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            "image": "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=1600",
+            "description": "Hamburguesa sencilla"
         },
         {
             "id": 3,
             "type": "Burger",
             "name": "Hamburguesa Simple",
-            "image": "https://images.pexels.com/photos/551991/pexels-photo-551991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "image": "https://images.pexels.com/photos/551991/pexels-photo-551991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "description": "Hamburguesa sencilla"
         },
         {
             "id": 4,
             "type": "Burger",
             "name": "Cheese Burger",
-            "image": "https://images.pexels.com/photos/660282/pexels-photo-660282.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            "image": "https://images.pexels.com/photos/660282/pexels-photo-660282.jpeg?auto=compress&cs=tinysrgb&w=1600",
+            "description": "Hamburguesa sencilla"
         },
         {
             "id": 5,
             "type": "Pizza",
             "name": "Pizza Pepperoni",
-            "image": "https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "image": "https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "description": "Hamburguesa sencilla"
         },
         {
             "id": 6,
             "type": "Pizza",
             "name": "Pizza with red pepper and cheese",
-            "image": "https://images.pexels.com/photos/1049620/pexels-photo-1049620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "image": "https://images.pexels.com/photos/1049620/pexels-photo-1049620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "description": "Hamburguesa sencilla"
         },
         {
             "id": 7,
             "type": "Pizza",
             "name": "Napolitan Pizza",
-            "image": "https://images.pexels.com/photos/3762075/pexels-photo-3762075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "image": "https://images.pexels.com/photos/3762075/pexels-photo-3762075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "description": "Hamburguesa sencilla"
         }
     ]
 }

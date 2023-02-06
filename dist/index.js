@@ -5,16 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const index_js_1 = __importDefault(require("./routes/index.js"));
 const morgan_1 = __importDefault(require("morgan"));
 const helmet = require('helmet');
 const error_handler_js_1 = require("./middlewares/error.handler.js");
 const cors_1 = __importDefault(require("cors"));
 const connect_js_1 = __importDefault(require("./db/connect.js"));
-dotenv_1.default.config();
 (0, connect_js_1.default)();
 const app = (0, express_1.default)();
-app.use(express_1.default.json());
+app.use(express_1.default.json({ limit: '50mb' }));
+app.use(express_1.default.urlencoded({ limit: '50mb', extended: true }));
 const localHost = 'http://localhost:3001';
 const whiteList = [process.env.URL, localHost];
 const options = {

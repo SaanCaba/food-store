@@ -4,6 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const validator_handler_1 = require("../middlewares/validator.handler");
+const foods_schema_1 = require("../schemas/foods.schema");
 const FoodsService_1 = __importDefault(require("../services/FoodsService"));
 const router = express_1.default.Router();
 const service = new FoodsService_1.default();
@@ -33,13 +35,10 @@ router.get('/:id', (req, res, next) => {
         next(error);
     }
 });
-router.post('/', async (req, res, next) => {
+router.post('/', (0, validator_handler_1.validateHandler)(foods_schema_1.getFormSchema, 'body'), async (req, res, next) => {
     try {
-        console.log(req.body);
-        let pepe = await service.createFood(req.body.info);
-        console.log(pepe);
-        res.json(pepe);
-        //type
+        let response = await service.createFood(req.body);
+        res.json(response);
     }
     catch (error) {
         next(error);

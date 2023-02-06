@@ -3,7 +3,7 @@ import { type } from 'os';
 import { nextTick } from 'process';
 import { validateHandler } from '../middlewares/validator.handler';
 import FoodProduct from '../models/foodProduct';
-import { getTypeSchema } from '../schemas/foods.schema';
+import { getFormSchema, getTypeSchema } from '../schemas/foods.schema';
 import FoodService from '../services/FoodsService';
 const router = express.Router()
 
@@ -39,13 +39,12 @@ router.get('/:id', (req: Request,res, next)=>{
 
 })
 
-router.post('/', async (req,res, next)=>{
+router.post('/', 
+    validateHandler(getFormSchema, 'body'),
+    async (req,res, next)=>{
     try {
-        console.log(req.body)
-    let pepe =  await service.createFood(req.body.info)
-    console.log(pepe)
-        res.json(pepe)
-        //type
+    let response =  await service.createFood(req.body)
+        res.json(response)
     } catch (error) {
         next(error)
     }   
