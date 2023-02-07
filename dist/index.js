@@ -33,6 +33,7 @@ app.use(helmet());
 app.use((0, morgan_1.default)('tiny'));
 app.use('/', index_js_1.default);
 app.use(error_handler_js_1.logErrors);
+app.use(error_handler_js_1.boomErrorHandler);
 app.use(error_handler_js_1.errorHandler);
 app.listen(process.env.PORT, () => console.log('Server run on port ', process.env.PORT));
 //# sourceMappingURL=index.js.map

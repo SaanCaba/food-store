@@ -9,8 +9,10 @@ const foods_schema_1 = require("../schemas/foods.schema");
 const FoodsService_1 = __importDefault(require("../services/FoodsService"));
 const router = express_1.default.Router();
 const service = new FoodsService_1.default();
-router.get('/', (req, res) => {
-    return res.status(200).json(service.getAllFoods());
+router.get('/', async (req, res) => {
+    let foods = await service.getAllFoods();
+    console.log('foods');
+    return res.status(200).json(foods);
 });
 router.get('/filter', 
 // validateHandler(getTypeSchema, 'query'),
@@ -25,10 +27,10 @@ router.get('/filter',
         next(error);
     }
 });
-router.get('/:id', (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
-        let food = service.findOneFood(id);
+        let food = await service.findOneFood(id);
         return res.status(200).json(food);
     }
     catch (error) {

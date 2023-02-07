@@ -9,8 +9,10 @@ const router = express.Router()
 
 const service = new FoodService();
 
-router.get('/', (req,res)=>{
-    return res.status(200).json(service.getAllFoods());
+router.get('/', async (req,res)=>{
+    let foods = await service.getAllFoods();
+    console.log('foods')
+    return res.status(200).json(foods);
 })
 
 router.get('/filter', 
@@ -28,10 +30,10 @@ router.get('/filter',
 })
 
 
-router.get('/:id', (req: Request,res, next)=>{
+router.get('/:id', async (req: Request,res, next)=>{
     try {
         const {id} = req.params;
-        let food = service.findOneFood(id)
+        let food = await service.findOneFood(id)
         return res.status(200).json(food);
     } catch (error) {
         next(error)

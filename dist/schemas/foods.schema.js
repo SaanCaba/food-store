@@ -6,10 +6,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFormSchema = exports.getTypeSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 // const id = Joi.string()
-const type = joi_1.default.string().min(3).max(10).message("Ese tipo no existe");
-const name = joi_1.default.string().min(3).max(30).message("Nombre incorrecto, debe ser mayor a 3 caracteres y menor a 30 caracteres");
-const description = joi_1.default.string().min(15).max(130).message("La descripcion debe ser mayor a 15 caracteres y menor a 130 caracteres!");
-const image = joi_1.default.string();
+const type = joi_1.default.string().min(3).max(10)
+    .messages({
+    'string.base': `The type must be a text`,
+    'string.empty': `The type cannot be an empty field`,
+});
+const name = joi_1.default.string().min(3).max(25)
+    .messages({
+    'string.base': `The Name must be a text`,
+    'string.empty': `The Name cannot be an empty field`,
+    'string.min': `The Name should have a minimum length of 3 letters`,
+    'any.required': `The name is a required field`
+});
+const description = joi_1.default.string().min(15).max(130)
+    .messages({
+    'string.base': `The Description must be a text`,
+    'string.empty': `The description cannot be an empty field`,
+    'string.min': `The Description should have a minimum length of 15 letters`,
+    'string.max': 'The description should have a max of 130 letters not more.',
+    'any.required': `The description is a required field`
+});
+const image = joi_1.default.string().messages({
+    'string.empty': `The image cannot be an empty field`,
+});
 exports.getTypeSchema = joi_1.default.object({
     type: type.required()
 });

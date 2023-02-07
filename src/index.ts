@@ -4,7 +4,7 @@ dotenv.config();
 import routes from './routes/index.js'
 import morgan from 'morgan';
 const helmet = require('helmet');
-import { errorHandler, logErrors } from './middlewares/error.handler.js';
+import { boomErrorHandler, errorHandler, logErrors } from './middlewares/error.handler.js';
 import cors from 'cors'
 import connection from './db/connect.js';
 
@@ -36,6 +36,7 @@ app.use('/', routes);
 
 
 app.use(logErrors);
+app.use(boomErrorHandler)
 app.use(errorHandler);
 
 
