@@ -86,6 +86,7 @@ class FoodService {
       type: info.type,
       description: info.description,
     }).save();
+    this.generateDB();
     return newFood;
   }
 
