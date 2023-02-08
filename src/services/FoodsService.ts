@@ -20,7 +20,7 @@ class FoodService {
     this.generateDB();
   }
   async getAllFoods() {
-    console.log("comidas", this.foods);
+    // console.log("comidas", this.foods);
     // let food = this.foods;
     // let dbFoods: Foods[] = await FoodProduct.find({});
     // let newArr = [];
@@ -69,7 +69,6 @@ class FoodService {
   }
 
   async createFood(info: Foods) {
-    console.log(this.foods.length);
     if (this.foods.length > 15) {
       throw boom.notFound(
         "The limit of created products is full! please wait for you opportunity to create your product!."
@@ -86,7 +85,8 @@ class FoodService {
       type: info.type,
       description: info.description,
     }).save();
-    this.generateDB();
+    this.foods.push(newFood);
+    console.log(this.foods);
     return newFood;
   }
 
