@@ -14,7 +14,7 @@ class FoodService {
         this.generateDB();
     }
     async getAllFoods() {
-        console.log("comidas", this.foods);
+        // console.log("comidas", this.foods);
         // let food = this.foods;
         // let dbFoods: Foods[] = await FoodProduct.find({});
         // let newArr = [];
@@ -60,7 +60,6 @@ class FoodService {
         return foodType;
     }
     async createFood(info) {
-        console.log(this.foods.length);
         if (this.foods.length > 15) {
             throw boom_1.default.notFound("The limit of created products is full! please wait for you opportunity to create your product!.");
         }
@@ -75,6 +74,8 @@ class FoodService {
             type: info.type,
             description: info.description,
         }).save();
+        this.foods.push(newFood);
+        console.log(this.foods);
         return newFood;
     }
     async findByName(value) {
