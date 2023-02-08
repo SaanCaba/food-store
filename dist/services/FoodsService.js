@@ -36,11 +36,11 @@ class FoodService {
     }
     async findOneFood(id) {
         if (id.length > 5) {
-            if (this.detailArr === undefined) {
-                let dbFoods = await foodProduct_1.default.find({});
-                this.detailArr = dbFoods;
-            }
-            let food = this.detailArr.find(food => food.id === id);
+            //   if (this.detailArr === undefined) {
+            //     let dbFoods: Foods[] = await FoodProduct.find({});
+            //     this.detailArr = dbFoods;
+            //   }
+            let food = this.foods.find(food => food.id === id);
             if (!food) {
                 throw boom_1.default.notFound("This food dont exist!");
             }
