@@ -27,6 +27,17 @@ router.get('/filter',
         next(error);
     }
 });
+router.get('/byname', async (req, res, next) => {
+    try {
+        const { name } = req.query;
+        const filteredProducts = await service.findByName(name);
+        console.log("filteredProducts", filteredProducts);
+        return res.status(200).json(filteredProducts);
+    }
+    catch (error) {
+        next(error);
+    }
+});
 router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;

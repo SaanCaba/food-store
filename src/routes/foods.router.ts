@@ -1,4 +1,4 @@
-import express, { Request } from 'express';
+import express, { Request, Response } from 'express';
 import { type } from 'os';
 import { nextTick } from 'process';
 import { validateHandler } from '../middlewares/validator.handler';
@@ -29,6 +29,16 @@ router.get('/filter',
 
 })
 
+router.get('/byname', async (req:Request, res: Response, next)=>{
+    try {
+    const {name} :any = req.query;
+    const filteredProducts = await service.findByName(name);
+    console.log("filteredProducts",filteredProducts)
+    return res.status(200).json(filteredProducts)
+    } catch (error) {
+        next(error)
+    }
+})
 
 router.get('/:id', async (req: Request,res, next)=>{
     try {
@@ -51,6 +61,7 @@ router.post('/',
         next(error)
     }   
 })
+
 
 
 

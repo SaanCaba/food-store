@@ -7,36 +7,39 @@ const data_json_1 = __importDefault(require("./data.json"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const foodProduct_1 = __importDefault(require("../models/foodProduct"));
 const uuid_1 = require("uuid");
-const { cloudinary } = require('../routes/utils/cloudinary');
+const { cloudinary } = require("../routes/utils/cloudinary");
 class FoodService {
     constructor() {
         this.foods = data_json_1.default.foods;
+        this.generateDB();
     }
     async getAllFoods() {
-        let food = this.foods;
-        let dbFoods = await foodProduct_1.default.find({});
-        let newArr = [];
-        food.map(e => {
-            newArr.push(e);
-        });
-        dbFoods.map(e => {
-            newArr.push(e);
-        });
-        this.detailArr = newArr;
-        return newArr;
+        console.log("comidas", this.foods);
+        // let food = this.foods;
+        // let dbFoods: Foods[] = await FoodProduct.find({});
+        // let newArr = [];
+        // food.map(e => {
+        //   newArr.push(e);
+        // });
+        // dbFoods.map(e => {
+        //   newArr.push(e);
+        // });
+        // this.detailArr = newArr;
+        return this.foods;
     }
-    // async generateDB(){
-    //     //añadimos los de la db
-    //   return  this.foods.concat(dbFoods)
-    // }
+    async generateDB() {
+        //añadimos los de la db
+        let dbFoods = await foodProduct_1.default.find({});
+        dbFoods.map(e => {
+            return this.foods.push(e);
+        });
+    }
     async findOneFood(id) {
-        console.log(this.detailArr);
         if (id.length > 5) {
             if (this.detailArr === undefined) {
                 let dbFoods = await foodProduct_1.default.find({});
                 this.detailArr = dbFoods;
             }
-            console.log(this.detailArr);
             let food = this.detailArr.find(food => food.id === id);
             if (!food) {
                 throw boom_1.default.notFound("This food dont exist!");
@@ -50,25 +53,36 @@ class FoodService {
         return food;
     }
     getTypeOfFood(type) {
-        let foodType = this.detailArr.filter(food => food.type === type);
+        let foodType = this.foods.filter(food => food.type === type);
         if (foodType.length === 0) {
             throw boom_1.default.notFound("This type dont exist!");
         }
         return foodType;
     }
     async createFood(info) {
+        console.log(this.foods.length);
+        if (this.foods.length > 15) {
+            throw boom_1.default.notFound("The limit of created products is full! please wait for you opportunity to create your product!.");
+        }
         const fileStr = info.image;
         const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-            upload_preset: 'dev_setups'
+            upload_preset: "dev_setups",
         });
         const newFood = await new foodProduct_1.default({
             id: (0, uuid_1.v4)(),
             image: uploadedResponse.url,
             name: info.name,
             type: info.type,
-            description: info.description
+            description: info.description,
         }).save();
         return newFood;
+    }
+    async findByName(value) {
+        let filterProducts = this.foods.filter(e => e.name.toLowerCase().includes(value.toLowerCase()));
+        if (filterProducts.length === 0) {
+            throw boom_1.default.badData("This product dont exist!");
+        }
+        return filterProducts;
     }
 }
 exports.default = FoodService;
