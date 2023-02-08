@@ -37,13 +37,11 @@ class FoodService{
     // }
 
    async findOneFood(id:string){
-        console.log(this.detailArr)
         if(id.length > 5){
             if(this.detailArr === undefined){
             let dbFoods : Foods[] = await FoodProduct.find({})
              this.detailArr = dbFoods;   
             }
-            console.log(this.detailArr)
             let food = this.detailArr.find(food => food.id === id);
         if(!food){
             throw boom.notFound("This food dont exist!")
