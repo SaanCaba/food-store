@@ -11,29 +11,19 @@ const { cloudinary } = require("../routes/utils/cloudinary");
 class FoodService {
     constructor() {
         this.foods = data_json_1.default.foods;
-        this.generateDB();
+        // this.generateDB();
     }
     async getAllFoods() {
-        // console.log("comidas", this.foods);
-        // let food = this.foods;
-        // let dbFoods: Foods[] = await FoodProduct.find({});
-        // let newArr = [];
-        // food.map(e => {
-        //   newArr.push(e);
-        // });
-        // dbFoods.map(e => {
-        //   newArr.push(e);
-        // });
-        // this.detailArr = newArr;
+        this.foods = await foodProduct_1.default.find({});
         return this.foods;
     }
-    async generateDB() {
-        //añadimos los de la db
-        let dbFoods = await foodProduct_1.default.find({});
-        dbFoods.map(e => {
-            return this.foods.push(e);
-        });
-    }
+    // async generateDB() {
+    //   //añadimos los de la db
+    //   let dbFoods: Foods[] = await FoodProduct.find({});
+    //   dbFoods.map(e => {
+    //     return this.foods.push(e);
+    //   });
+    // }
     async findOneFood(id) {
         if (id.length > 5) {
             //   if (this.detailArr === undefined) {

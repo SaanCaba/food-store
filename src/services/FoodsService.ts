@@ -17,29 +17,20 @@ class FoodService {
   detailArr: Array<Foods>;
   constructor() {
     this.foods = foods.foods;
-    this.generateDB();
+    // this.generateDB();
   }
   async getAllFoods() {
-    // console.log("comidas", this.foods);
-    // let food = this.foods;
-    // let dbFoods: Foods[] = await FoodProduct.find({});
-    // let newArr = [];
-    // food.map(e => {
-    //   newArr.push(e);
-    // });
-    // dbFoods.map(e => {
-    //   newArr.push(e);
-    // });
-    // this.detailArr = newArr;
-    return this.foods;
+    this.foods = await FoodProduct.find({});
+    return this.foods
   }
-  async generateDB() {
-    //añadimos los de la db
-    let dbFoods: Foods[] = await FoodProduct.find({});
-    dbFoods.map(e => {
-      return this.foods.push(e);
-    });
-  }
+
+  // async generateDB() {
+  //   //añadimos los de la db
+  //   let dbFoods: Foods[] = await FoodProduct.find({});
+  //   dbFoods.map(e => {
+  //     return this.foods.push(e);
+  //   });
+  // }
 
   async findOneFood(id: string) {
     if (id.length > 5) {

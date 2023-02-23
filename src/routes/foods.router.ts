@@ -5,13 +5,15 @@ import { validateHandler } from '../middlewares/validator.handler';
 import FoodProduct from '../models/foodProduct';
 import { getFormSchema, getTypeSchema } from '../schemas/foods.schema';
 import FoodService from '../services/FoodsService';
+import foods from "../services/data.json";
+
 const router = express.Router()
 
 const service = new FoodService();
 
+
 router.get('/', async (req,res)=>{
     let foods = await service.getAllFoods();
-    console.log('foods')
     return res.status(200).json(foods);
 })
 

@@ -11,7 +11,6 @@ const router = express_1.default.Router();
 const service = new FoodsService_1.default();
 router.get('/', async (req, res) => {
     let foods = await service.getAllFoods();
-    console.log('foods');
     return res.status(200).json(foods);
 });
 router.get('/filter', 
